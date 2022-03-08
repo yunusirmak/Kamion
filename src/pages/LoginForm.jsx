@@ -24,9 +24,9 @@ export default function LoginForm() {
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+      .email("Email adresi gerçek olmalı.")
+      .required("Email gerekli."),
+    password: Yup.string().required("Şifre gerekli"),
   });
 
   const formik = useFormik({
@@ -50,14 +50,14 @@ export default function LoginForm() {
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <Typography variant="h1" margin={1}>
-            Log In
+            Giriş
           </Typography>
           <TextField
             fullWidth
             focused
             id="input"
             type="email"
-            label="Email address"
+            label="Email adresi"
             {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
@@ -68,7 +68,7 @@ export default function LoginForm() {
             focused
             id="input"
             type={showPassword ? "text" : "password"}
-            label="Password"
+            label="Şifre"
             {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
@@ -100,7 +100,7 @@ export default function LoginForm() {
           variant="contained"
           loading={isSubmitting}
         >
-          Login
+          Giriş Yap
         </LoadingButton>
       </Form>
     </FormikProvider>

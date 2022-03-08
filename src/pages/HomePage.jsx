@@ -33,6 +33,9 @@ export default function HomePage() {
       h3: {
         fontWeight: "800",
       },
+      button: {
+        textTransform: "none",
+      },
     },
   });
   return (
@@ -65,9 +68,7 @@ export default function HomePage() {
           {selection ? <LoginForm /> : <RegisterForm />}
 
           <Typography variant="body1" margin={2}>
-            {selection
-              ? "Don't Have An Account Yet?"
-              : "Already Have An Account?"}
+            {selection ? "Hesabın yok mu? " : "Zaten hesabın var mı? "}
             <Button
               style={{ marginLeft: 10 }}
               variant="outlined"
@@ -76,7 +77,7 @@ export default function HomePage() {
                 setSelection(!selection);
               }}
             >
-              {selection ? "Register" : "Login"}
+              {selection ? "Kayıt Ol" : "Giriş Yap"}
             </Button>
           </Typography>
         </Grid>

@@ -26,24 +26,24 @@ export default function RegisterForm() {
 
   const RegisterSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+      .email("Email adresi gerçek olmalı.")
+      .required("Email adresi gerekli."),
+    password: Yup.string().required("Şifre gerekli."),
     phoneNumber: Yup.string()
-      .required("Phone number is required")
-      .matches(phoneRegExp, "Phone number is not valid"),
+      .required("Telefon numarası gerekli.")
+      .matches(phoneRegExp, "Telefon numarası gerçek olmalı."),
     username: Yup.string()
-      .min(5, "Too Short!")
-      .max(20, "Too Long!")
-      .required("First name is required"),
+      .min(5, "Çok kısa!")
+      .max(20, "Çok uzun!")
+      .required("Kullanıcı adı gerekli."),
     firstName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("First name is required"),
+      .min(2, "Çok kısa!")
+      .max(50, "Çok uzun!")
+      .required("İsim gerekli."),
     lastName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Last name is required"),
+      .min(2, "Çok kısa!")
+      .max(50, "Çok uzun!")
+      .required("Soyisim gerekli."),
   });
 
   const formik = useFormik({
@@ -71,14 +71,14 @@ export default function RegisterForm() {
       <Form autoComplete="on" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <Typography variant="h1" margin={1}>
-            Register
+            Kayıt
           </Typography>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <TextField
               fullWidth
               focused
               id="input"
-              label="First name"
+              label="İsim"
               {...getFieldProps("firstName")}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
@@ -88,7 +88,7 @@ export default function RegisterForm() {
               fullWidth
               focused
               id="input"
-              label="Last name"
+              label="Soyisim"
               {...getFieldProps("lastName")}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
@@ -99,7 +99,7 @@ export default function RegisterForm() {
               fullWidth
               focused
               id="input"
-              label="Username"
+              label="Kullanıcı Adı"
               {...getFieldProps("username")}
               error={Boolean(touched.username && errors.username)}
               helperText={touched.username && errors.username}
@@ -109,7 +109,7 @@ export default function RegisterForm() {
               focused
               id="input"
               type={showPassword ? "text" : "password"}
-              label="Password"
+              label="Şifre"
               {...getFieldProps("password")}
               InputProps={{
                 endAdornment: (
@@ -138,7 +138,7 @@ export default function RegisterForm() {
               focused
               id="input"
               type="email"
-              label="Email address"
+              label="Email adresi"
               {...getFieldProps("email")}
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
@@ -148,7 +148,7 @@ export default function RegisterForm() {
               fullWidth
               focused
               id="input"
-              label="Phone Number"
+              label="Telefon Numarası"
               placeholder="905345343434"
               {...getFieldProps("phoneNumber")}
               error={Boolean(touched.phoneNumber && errors.phoneNumber)}
@@ -165,7 +165,7 @@ export default function RegisterForm() {
           variant="contained"
           loading={isSubmitting}
         >
-          Register
+          Kayıt Ol
         </LoadingButton>
       </Form>
     </FormikProvider>

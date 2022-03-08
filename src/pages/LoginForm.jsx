@@ -11,8 +11,11 @@ import {
   InputAdornment,
   FormControlLabel,
   Typography,
+  Button,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 // ----------------------------------------------------------------------
 
@@ -73,7 +76,14 @@ export default function LoginForm() {
                   <IconButton
                     onClick={handleShowPassword}
                     edge="end"
-                  ></IconButton>
+                    sx={{ color: "white" }}
+                  >
+                    {showPassword ? (
+                      <VisibilityIcon fontSize="small" />
+                    ) : (
+                      <VisibilityOffIcon fontSize="small" />
+                    )}
+                  </IconButton>
                 </InputAdornment>
               ),
             }}
@@ -92,9 +102,6 @@ export default function LoginForm() {
         >
           Login
         </LoadingButton>
-        <Typography variant="body1" margin={3}>
-          Don't Have An Acoount Yet? <Link to="/register">Register</Link>
-        </Typography>
       </Form>
     </FormikProvider>
   );

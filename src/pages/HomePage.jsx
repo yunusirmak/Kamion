@@ -1,11 +1,16 @@
+import { useState } from "react";
 import "./HomePage.css";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import logo from "./img/logo.png";
-import LoginForm from "./Login";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 export default function HomePage() {
+  const [selection, setSelection] = useState(true);
   const theme = createTheme({
     palette: {
       primary: {
@@ -57,7 +62,23 @@ export default function HomePage() {
           </Box>
         </Grid>
         <Grid item>
-          <LoginForm />
+          {selection ? <LoginForm /> : <RegisterForm />}
+
+          <Typography variant="body1" margin={2}>
+            {selection
+              ? "Don't Have An Account Yet?"
+              : "Already Have An Account?"}
+            <Button
+              style={{ marginLeft: 10 }}
+              variant="outlined"
+              size="small"
+              onClick={() => {
+                setSelection(!selection);
+              }}
+            >
+              {selection ? "Register" : "Login"}
+            </Button>
+          </Typography>
         </Grid>
       </Grid>
     </ThemeProvider>

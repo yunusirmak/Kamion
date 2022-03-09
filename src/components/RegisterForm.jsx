@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
+import { useAuth } from "../context/AuthContext";
 // material
 import {
   Link,
@@ -19,7 +20,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 // ----------------------------------------------------------------------
 
-export default function RegisterForm() {
+export default function RegisterForm({ setSelection }) {
+  const { register } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -56,7 +58,25 @@ export default function RegisterForm() {
       password: "",
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {},
+    onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
+      try {
+        await register(
+          values.username,
+          values.password,
+          values.firstName,
+          values.lastName,
+          values.phoneNumber,
+          values.email
+        );
+        resetForm();
+        setSelection(true);
+      } catch (error) {
+        setErrors({
+          email: "Bu kullanıcı zaten kayıtlı.",
+        });
+      }
+      setSubmitting(false);
+    },
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =

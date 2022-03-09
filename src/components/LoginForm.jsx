@@ -1,17 +1,15 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 // material
 import {
-  Link,
   Stack,
-  Checkbox,
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel,
   Typography,
-  Button,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -20,22 +18,33 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Email adresi gerçek olmalı.")
-      .required("Email gerekli."),
+    username: Yup.string().required("Kullanıcı adı gerekli."),
     password: Yup.string().required("Şifre gerekli"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {},
+    onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
+      try {
+        await login(values.username, values.password);
+        resetForm();
+        navigate("/dashboard/app");
+      } catch (error) {
+        setErrors({
+          username: "Kullanıcı adı veya şifre hatalı.",
+        });
+      }
+      setSubmitting(false);
+    },
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
@@ -56,11 +65,10 @@ export default function LoginForm() {
             fullWidth
             focused
             id="input"
-            type="email"
-            label="Email adresi"
-            {...getFieldProps("email")}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
+            label="Kullanıcı Adı"
+            {...getFieldProps("username")}
+            error={Boolean(touched.username && errors.username)}
+            helperText={touched.username && errors.username}
           />
 
           <TextField

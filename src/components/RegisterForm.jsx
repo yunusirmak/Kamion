@@ -4,15 +4,11 @@ import { useFormik, Form, FormikProvider } from "formik";
 import { useAuth } from "../context/AuthContext";
 // material
 import {
-  Link,
   Stack,
-  Checkbox,
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel,
   Typography,
-  Button,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import VisibilityIcon from "@mui/icons-material/Visibility";

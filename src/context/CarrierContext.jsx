@@ -1,6 +1,4 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { useAuth } from "./AuthContext";
+import { createContext, useState, useContext } from "react";
 
 const CarrierContext = createContext();
 

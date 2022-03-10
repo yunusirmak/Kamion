@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EditDialog from "./EditDialog";
 
 export default function UserCard({ carrier }) {

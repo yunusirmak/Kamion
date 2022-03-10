@@ -1,8 +1,6 @@
-import Typography from "@mui/material/Typography";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useState } from "react";
 import { useCarrier } from "../context/CarrierContext";
 
 export default function BottomPagination() {
@@ -31,7 +29,6 @@ export default function BottomPagination() {
     },
   });
   const { currentPage, setCurrentPage, totalPages } = useCarrier();
-  const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };

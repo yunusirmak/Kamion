@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Kamion/static/css/main.3417934a.css",
+    "main.js": "/Kamion/static/js/main.ba53503d.js",
+    "index.html": "/Kamion/index.html",
+    "main.3417934a.css.map": "/Kamion/static/css/main.3417934a.css.map",
+    "main.ba53503d.js.map": "/Kamion/static/js/main.ba53503d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3417934a.css",
+    "static/js/main.ba53503d.js"
+  ]
+}

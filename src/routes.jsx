@@ -1,28 +1,30 @@
 import { Navigate, useRoutes } from "react-router-dom";
 //
-import Blank from "./Blank";
 import HomePage from "./pages/HomePage";
+import Dashboard from "./pages/Dashboard";
+import Users from "./pages/Users";
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const user = JSON.parse(localStorage.getItem("user")) || null;
   return useRoutes([
     {
       path: "/dashboard",
-      element: <Blank />,
+      element: <Dashboard />,
       children: [
-        { path: "yunus", element: <Blank /> },
-        { path: "app", element: <HomePage /> },
+        { path: "yunus", element: <Dashboard /> },
+        { path: "app", element: <Users /> },
       ],
     },
     {
       path: "/",
-      element: <HomePage />,
+      element: user !== null ? <Navigate to="/dashboard" /> : <HomePage />,
       children: [
         { path: "/", element: <Navigate to="/dashboard/app" /> },
         { path: "login", element: <HomePage /> },
         { path: "register", element: <HomePage /> },
-        { path: "404", element: <Blank /> },
+        { path: "404", element: <Dashboard /> },
         { path: "*", element: <Navigate to="/404" /> },
       ],
     },

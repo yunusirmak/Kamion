@@ -7,8 +7,17 @@ import { useCarrier } from "../context/CarrierContext";
 import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router";
 import AddIcon from "@mui/icons-material/Add";
+import UploadDialog from "../components/UploadDialog";
 export default function Users() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const {
     filtered,
@@ -73,7 +82,7 @@ export default function Users() {
               marginTop: { xs: 2, sm: 0 },
             }}
             onClick={() => {
-              navigate("/dashboard/yunus");
+              handleClickOpen();
             }}
           >
             Yeni Taşıyıcı Ekle
@@ -110,6 +119,7 @@ export default function Users() {
           padding: 5,
         }}
       />
+      <UploadDialog open={open} handleClose={handleClose} />
     </>
   );
 }
